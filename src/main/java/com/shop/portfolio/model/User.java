@@ -24,4 +24,6 @@ public class User extends AbstractEntity {
 
     private LocalDateTime dateOfBirth;
 
+    private String password;
+
 }
