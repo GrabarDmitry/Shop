@@ -8,33 +8,28 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import java.time.LocalDateTime;
-
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends AbstractEntity {
+public class Product extends AbstractEntity {
 
-    private String email;
+    private String title;
 
-    private String name;
-
-    private String surname;
-
-    private LocalDateTime dateOfBirth;
-
-    private String password;
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "roleId")
-    private Role role;
-
-    @OneToOne
     @JoinColumn(name = "cartId")
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "productCategoryId")
+    private ProductCategory productCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
 }
