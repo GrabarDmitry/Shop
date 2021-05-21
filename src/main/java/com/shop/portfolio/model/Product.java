@@ -32,4 +32,6 @@ public class Product extends AbstractEntity {
     @JoinColumn(name = "userId")
     private User user;
 
+
+
 }
