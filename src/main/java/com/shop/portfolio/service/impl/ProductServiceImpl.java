@@ -32,7 +32,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        return null;
+        log.info("Service method called to create Product: {}", product);
+        return productDAO.save(product);
+
     }
 
     @Override

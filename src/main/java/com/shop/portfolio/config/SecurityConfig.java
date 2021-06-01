@@ -3,6 +3,7 @@ package com.shop.portfolio.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,6 +31,8 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/product/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/productCategory/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors()

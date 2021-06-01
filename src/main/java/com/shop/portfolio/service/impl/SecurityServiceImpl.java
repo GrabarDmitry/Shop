@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,13 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public String registration(User user) {
         return null;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        log.info("Service method called to get Current User");
+        return ((UserDetailsImpl) SecurityContextHolder.
+                getContext().getAuthentication().getPrincipal()).getUser();
     }
 
 }

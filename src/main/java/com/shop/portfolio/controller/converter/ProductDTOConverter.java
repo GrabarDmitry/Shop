@@ -3,8 +3,9 @@ package com.shop.portfolio.controller.converter;
 import com.shop.portfolio.controller.dto.request.ProductCreateDTO;
 import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.model.Product;
+import com.shop.portfolio.service.ProductCategoryService;
+import com.shop.portfolio.service.SecurityService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductDTOConverter {
 
+    private final ProductCategoryService categoryService;
+    private final SecurityService securityService;
 
     public ProductDTO toDTO(Product product) {
         log.trace("Convert Product: {}, to ProductDTO", product);
@@ -22,18 +25,24 @@ public class ProductDTOConverter {
                 product.getDescription(),
                 product.getProductCategory() != null
                         ? product.getProductCategory().getTitle() :
+                        null,
+                product.getUser() != null
+                        ? product.getUser().getEmail() :
                         null
         );
     }
 
-//    public Product toEntity(ProductCreateDTO createDTO) {
-//        log.trace("Convert CreateProductDTO: {}, to Product", createDTO);
-//        return new Product(
-//                createDTO.getTitle(),
-//                createDTO.getDescription(),
-//                null,
-//
-//                );
-//    }
+    public Product toEntity(ProductCreateDTO createDTO) {
+        log.trace("Convert CreateProductDTO: {}, to Product", createDTO);
+        return new Product(
+                createDTO.getTitle(),
+                createDTO.getDescription(),
+                null,
+                (categoryService.findProductCategoryById(createDTO.getCategoryId()) != null)
+                        ? categoryService.findProductCategoryById(createDTO.getCategoryId())
+                        : null
+                , securityService.getCurrentUser()
+        );
+    }
 
 }

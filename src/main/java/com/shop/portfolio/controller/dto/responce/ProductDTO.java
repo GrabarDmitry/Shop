@@ -12,4 +12,5 @@ public class ProductDTO {
     private String title;
     private String description;
     private String category;
+    private String userEmail;
 }

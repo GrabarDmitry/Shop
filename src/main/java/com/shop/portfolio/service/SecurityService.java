@@ -8,4 +8,6 @@ public interface SecurityService {
 
     String registration(User user);
 
+    User getCurrentUser();
+
 }

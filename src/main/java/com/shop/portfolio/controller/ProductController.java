@@ -1,6 +1,7 @@
 package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductDTOConverter;
+import com.shop.portfolio.controller.dto.request.ProductCreateDTO;
 import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.util.PageableSwagger;
@@ -14,9 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = {"Product"})
@@ -45,6 +44,17 @@ public class ProductController {
                         .findAllProducts(pageable)
                         .map(converter::toDTO)
                 , HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Create new Product")
+    @PostMapping
+    public ResponseEntity<ProductDTO> createProduct(
+            @RequestBody ProductCreateDTO createDTO) {
+        log.trace("Controller method called to create new Product: {}", createDTO);
+        return new ResponseEntity<>(converter.
+                toDTO(productService.
+                        createProduct(converter.toEntity(createDTO))),
+                HttpStatus.CREATED);
     }
 
 

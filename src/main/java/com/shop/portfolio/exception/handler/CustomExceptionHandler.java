@@ -13,19 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ExceptionInfo> badCredentialsExceptionHandle(BadCredentialsException ex) {
-        log.error("{}: {}", ex.getClass(), ex.getMessage());
-        return ResponseEntity
-                .badRequest()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(new ExceptionInfo(
-                        HttpStatus.BAD_REQUEST,
-                        ex.getMessage()));
-    }
-
-    @ExceptionHandler(ResourceException.class)
-    public ResponseEntity<ExceptionInfo> resourceExceptionHandle(ResourceException ex) {
+    @ExceptionHandler({BadCredentialsException.class,ResourceException.class})
+    public ResponseEntity<ExceptionInfo> badCredentialsExceptionHandle(Exception ex) {
         log.error("{}: {}", ex.getClass(), ex.getMessage());
         return ResponseEntity
                 .badRequest()

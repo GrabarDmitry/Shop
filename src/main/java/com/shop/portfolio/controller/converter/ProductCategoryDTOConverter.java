@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class ProductCategoryConverter {
+public class ProductCategoryDTOConverter {
 
     public ProductCategoryDTO toDTO(ProductCategory product) {
         log.trace("Convert ProductCategory: {}, to ProductCategoryDTO", product);
