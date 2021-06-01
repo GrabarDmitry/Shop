@@ -1,7 +1,7 @@
 package com.shop.portfolio.controller;
 
-import com.shop.portfolio.controller.dto.AuthenticationDTO;
-import com.shop.portfolio.controller.dto.AuthenticationResponseDTO;
+import com.shop.portfolio.controller.dto.request.AuthenticationDTO;
+import com.shop.portfolio.controller.dto.responce.AuthenticationResponseDTO;
 import com.shop.portfolio.service.SecurityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

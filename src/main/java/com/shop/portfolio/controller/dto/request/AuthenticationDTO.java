@@ -1,4 +1,4 @@
-package com.shop.portfolio.controller.dto;
+package com.shop.portfolio.controller.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductDTOConverter;
-import com.shop.portfolio.controller.dto.ProductDTO;
+import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.util.PageableSwagger;
 import io.swagger.annotations.Api;
@@ -22,7 +22,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(tags = {"Product"})
 @RestController
 @Slf4j
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -36,7 +36,7 @@ public class ProductController {
             @ApiIgnore
             @PageableDefault(
                     page = 0,
-                    size = 5,
+                    size = 20,
                     sort = "id",
                     direction = Sort.Direction.ASC) Pageable pageable) {
         log.trace("Controller method called to view all Products with params: {}", pageable);

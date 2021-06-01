@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtConfig config;
+    private final JWTConfig config;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
