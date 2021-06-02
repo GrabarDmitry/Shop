@@ -2,6 +2,7 @@ package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductDTOConverter;
 import com.shop.portfolio.controller.dto.request.ProductCreateDTO;
+import com.shop.portfolio.controller.dto.responce.ProductCategoryDTO;
 import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.util.PageableSwagger;
@@ -44,6 +45,16 @@ public class ProductController {
                         .findAllProducts(pageable)
                         .map(converter::toDTO)
                 , HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get Product by Id")
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        log.trace("Controller method called to view Product with id: {}", id);
+        return new ResponseEntity<>(
+                converter.
+                        toDTO(productService.findProductById(id)),
+                HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create new Product")
