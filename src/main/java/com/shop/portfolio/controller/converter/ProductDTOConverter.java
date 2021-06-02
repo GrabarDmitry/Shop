@@ -24,10 +24,10 @@ public class ProductDTOConverter {
                 product.getTitle(),
                 product.getDescription(),
                 product.getProductCategory() != null
-                        ? product.getProductCategory().getTitle() :
+                        ? product.getProductCategory().getId() :
                         null,
                 product.getUser() != null
-                        ? product.getUser().getEmail() :
+                        ? product.getUser().getId() :
                         null
         );
     }
@@ -38,10 +38,10 @@ public class ProductDTOConverter {
                 createDTO.getTitle(),
                 createDTO.getDescription(),
                 null,
-                (categoryService.findProductCategoryById(createDTO.getCategoryId()) != null)
-                        ? categoryService.findProductCategoryById(createDTO.getCategoryId())
-                        : null
-                , securityService.getCurrentUser()
+                createDTO.getCategoryId() != null
+                        ? categoryService.findProductCategory(createDTO.getCategoryId()).get()
+                        : null,
+                securityService.getCurrentUser().get()
         );
     }
 

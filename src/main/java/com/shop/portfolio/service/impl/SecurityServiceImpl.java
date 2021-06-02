@@ -9,10 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -44,10 +47,14 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public User getCurrentUser() {
+    public Optional<User> getCurrentUser() {
         log.info("Service method called to get Current User");
-        return ((UserDetailsImpl) SecurityContextHolder.
-                getContext().getAuthentication().getPrincipal()).getUser();
+        return Optional.of(SecurityContextHolder.getContext().getAuthentication())
+                .map(Authentication::getPrincipal)
+                .filter(principal -> principal instanceof UserDetailsImpl)
+                .map(principal -> Optional.of(((UserDetailsImpl) principal).getUser()))
+                .orElse(Optional.empty());
+
     }
 
 }

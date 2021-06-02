@@ -11,6 +11,6 @@ public class ProductDTO {
     private Long id;
     private String title;
     private String description;
-    private String category;
-    private String userEmail;
+    private Long productCategoryId;
+    private Long userId;
 }

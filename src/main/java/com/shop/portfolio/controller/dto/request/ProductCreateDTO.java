@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class ProductCreateDTO {
-    private Long id;
     private String title;
     private String description;
     private Long categoryId;
