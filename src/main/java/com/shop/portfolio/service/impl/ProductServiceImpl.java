@@ -1,6 +1,7 @@
 package com.shop.portfolio.service.impl;
 
 import com.shop.portfolio.dao.ProductDAO;
+import com.shop.portfolio.exception.ResourceException;
 import com.shop.portfolio.model.Product;
 import com.shop.portfolio.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +20,23 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDAO productDAO;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<Product> findAllProducts(Pageable pageable) {
-        log.info("Service method called to find all Products with params: {}", pageable);
+        log.trace("Service method called to find all Products with params: {}", pageable);
         return productDAO.findAll(pageable);
 
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Product findProductById(Long id) {
-        return null;
+        log.trace("Service method called to find Product with id: {}", id);
+        return productDAO.findById(id).
+                orElseThrow(() -> {
+                    log.warn("Product with Id: {} not found", id);
+                    throw new ResourceException("Product with Id: " + id + " not found");
+                });
+
     }
 
     @Override
@@ -39,11 +48,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product product) {
-        return null;
+        log.info("Service method called to update Product with id: {}", product.getId());
+        productDAO.findById(product.getId())
+                .ifPresentOrElse(
+                        u -> productDAO.saveAndFlush(product),
+                        () -> {
+                            log.error("Product with Id: {} not found", product.getId());
+                            throw new ResourceException("Product with Id: " + product.getId() + " not found");
+                        }
+                );
+
+        return product;
+
     }
 
     @Override
     public void deleteProductById(Long id) {
-
+        log.info("Service method called to delete Product with id: {}", id);
+        productDAO.deleteById(id);
     }
 }
