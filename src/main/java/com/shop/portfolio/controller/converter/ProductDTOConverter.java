@@ -4,6 +4,7 @@ import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
 import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.model.Product;
 import com.shop.portfolio.service.ProductCategoryService;
+import com.shop.portfolio.service.ProductImageService;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.service.SecurityService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class ProductDTOConverter {
     private final ProductCategoryService categoryService;
     private final SecurityService securityService;
     private final ProductService productService;
+    private final ProductImageService imageService;
 
     public ProductDTO toDTO(Product product) {
         log.trace("Convert Product: {}, to ProductDTO", product);
@@ -26,11 +28,11 @@ public class ProductDTOConverter {
                 product.getTitle(),
                 product.getDescription(),
                 product.getProductCategory() != null
-                        ? product.getProductCategory().getId() :
-                        null,
+                        ? product.getProductCategory().getId()
+                        : null,
                 product.getUser() != null
-                        ? product.getUser().getId() :
-                        null
+                        ? product.getUser().getId()
+                        : null
         );
     }
 
@@ -44,7 +46,9 @@ public class ProductDTOConverter {
                         ? categoryService.findProductCategory(createDTO.getCategoryId()).get()
                         : null,
                 securityService.getCurrentUser().get(),
-                null
+                createDTO.getImagePath() != null
+                        ? null
+                        : null
         );
     }
 

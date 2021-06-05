@@ -15,7 +15,6 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 public class ProductImage extends AbstractEntity {
 
-
     @Column(nullable = false)
     private String path;
 
