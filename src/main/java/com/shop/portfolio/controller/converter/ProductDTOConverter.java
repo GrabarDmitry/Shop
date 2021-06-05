@@ -43,7 +43,8 @@ public class ProductDTOConverter {
                 createDTO.getCategoryId() != null
                         ? categoryService.findProductCategory(createDTO.getCategoryId()).get()
                         : null,
-                securityService.getCurrentUser().get()
+                securityService.getCurrentUser().get(),
+                null
         );
     }
 

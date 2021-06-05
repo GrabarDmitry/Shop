@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 public class ProductCategory extends AbstractEntity {
 
-    @Column(length = 45)
+    @Column(length = 45, nullable = false)
     private String title;
 
 }

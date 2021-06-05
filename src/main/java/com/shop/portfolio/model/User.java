@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -19,21 +16,30 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User extends AbstractEntity {
 
+    @Column(nullable = false)
     private String email;
 
+
+    @Column(nullable = false)
     private String name;
 
+
+    @Column(nullable = false)
     private String surname;
 
+
+    @Column(nullable = false)
     private LocalDateTime dateOfBirth;
 
+
+    @Column(nullable = false)
     private String password;
 
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "cartId")
     private Cart cart;
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,8 +17,12 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 public class Product extends AbstractEntity {
 
+
+    @Column(nullable = false)
     private String title;
 
+
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
@@ -31,5 +36,9 @@ public class Product extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "productImageId")
+    private ProductImage productImage;
 
 }

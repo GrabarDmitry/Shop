@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 @Setter
@@ -16,10 +15,8 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 public class ProductImage extends AbstractEntity {
 
-    private String path;
 
-    @ManyToOne
-    @JoinColumn(name = "productId")
-    private Product product;
+    @Column(nullable = false)
+    private String path;
 
 }

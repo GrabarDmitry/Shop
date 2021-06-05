@@ -80,11 +80,4 @@ public class ProductController {
                 HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Get Product by Id")
-    @GetMapping("/test")
-    public String test() {
-        return "<h4 style=\"color: red;font-size:24px;align-content:center\">Hello!</h4>";
-    }
-
-
 }
