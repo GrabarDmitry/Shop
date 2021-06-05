@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class ProductCreateDTO {
+public class ProductRequestDTO {
     private String title;
     private String description;
     private Long categoryId;

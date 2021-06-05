@@ -1,6 +1,6 @@
 package com.shop.portfolio.service.impl;
 
-import com.shop.portfolio.dao.UserDAO;
+import com.shop.portfolio.repository.UserRepository;
 import com.shop.portfolio.model.User;
 import com.shop.portfolio.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Log4j2
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserDAO userDAO;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetailsImpl loadUserByUsername(String email) {
         log.info("Service method called to load User with email: {}", email);
-        User user = userDAO.findUserByEmail(email).
+        User user = userRepository.findUserByEmail(email).
                 orElseThrow(() -> {
                     log.warn("User not found with email: {}", email);
                     throw new UsernameNotFoundException("User with email " + email + " not found!"); });

@@ -1,6 +1,6 @@
 package com.shop.portfolio.service.impl;
 
-import com.shop.portfolio.dao.ProductDAO;
+import com.shop.portfolio.repository.ProductRepository;
 import com.shop.portfolio.exception.ResourceException;
 import com.shop.portfolio.model.Product;
 import com.shop.portfolio.service.ProductService;
@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductDAO productDAO;
+    private final ProductRepository productRepository;
 
     @Override
     @Transactional(readOnly = true)
     public Page<Product> findAllProducts(Pageable pageable) {
         log.trace("Service method called to find all Products with params: {}", pageable);
-        return productDAO.findAll(pageable);
+        return productRepository.findAll(pageable);
 
     }
 
@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public Product findProductById(Long id) {
         log.trace("Service method called to find Product with id: {}", id);
-        return productDAO.findById(id).
+        return productRepository.findById(id).
                 orElseThrow(() -> {
                     log.warn("Product with Id: {} not found", id);
                     throw new ResourceException("Product with Id: " + id + " not found");
@@ -42,16 +42,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product createProduct(Product product) {
         log.info("Service method called to create Product: {}", product);
-        return productDAO.save(product);
+        return productRepository.save(product);
 
     }
 
     @Override
     public Product updateProduct(Product product) {
         log.info("Service method called to update Product with id: {}", product.getId());
-        productDAO.findById(product.getId())
+        productRepository.findById(product.getId())
                 .ifPresentOrElse(
-                        u -> productDAO.saveAndFlush(product),
+                        u -> productRepository.saveAndFlush(product),
                         () -> {
                             log.error("Product with Id: {} not found", product.getId());
                             throw new ResourceException("Product with Id: " + product.getId() + " not found");
@@ -65,6 +65,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProductById(Long id) {
         log.info("Service method called to delete Product with id: {}", id);
-        productDAO.deleteById(id);
+        productRepository.deleteById(id);
     }
 }

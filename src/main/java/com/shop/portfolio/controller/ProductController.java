@@ -1,8 +1,7 @@
 package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductDTOConverter;
-import com.shop.portfolio.controller.dto.request.ProductCreateDTO;
-import com.shop.portfolio.controller.dto.responce.ProductCategoryDTO;
+import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
 import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.util.PageableSwagger;
@@ -60,12 +59,31 @@ public class ProductController {
     @ApiOperation(value = "Create new Product")
     @PostMapping
     public ResponseEntity<ProductDTO> createProduct(
-            @RequestBody ProductCreateDTO createDTO) {
+            @RequestBody ProductRequestDTO createDTO) {
         log.trace("Controller method called to create new Product: {}", createDTO);
         return new ResponseEntity<>(converter.
                 toDTO(productService.
                         createProduct(converter.toEntity(createDTO))),
                 HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "Update Product by id")
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProductById(
+            @PathVariable Long id,
+            @RequestBody ProductRequestDTO updateDTO
+    ) {
+        log.trace("Controller method called to update Product with id: {}", id);
+        return new ResponseEntity<>(converter.
+                toDTO(productService.
+                        updateProduct(converter.toEntity(id, updateDTO))),
+                HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get Product by Id")
+    @GetMapping("/test")
+    public String test() {
+        return "<h4 style=\"color: red;font-size:24px;align-content:center\">Hello!</h4>";
     }
 
 

@@ -1,6 +1,6 @@
 package com.shop.portfolio.service.impl;
 
-import com.shop.portfolio.dao.ProductCategoryDAO;
+import com.shop.portfolio.repository.ProductCategoryRepository;
 import com.shop.portfolio.exception.ResourceException;
 import com.shop.portfolio.model.ProductCategory;
 import com.shop.portfolio.service.ProductCategoryService;
@@ -17,13 +17,13 @@ import java.util.Optional;
 @Transactional
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
-    private final ProductCategoryDAO productCategoryDAO;
+    private final ProductCategoryRepository productCategoryRepository;
 
     @Transactional(readOnly = true)
     @Override
     public ProductCategory findProductCategoryById(Long id) {
         log.trace("Service method called to view Product Category with id: {}", id);
-        return productCategoryDAO
+        return productCategoryRepository
                 .findById(id)
                 .orElseThrow(() -> {
                     throw new ResourceException("Product Category with Id: " + id + " not found");
@@ -34,7 +34,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public Optional<ProductCategory> findProductCategory(Long id) {
         log.trace("Service method called to view Product Category with id: {}", id);
-        return productCategoryDAO.findById(id);
+        return productCategoryRepository.findById(id);
     }
 
 
