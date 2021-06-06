@@ -40,7 +40,7 @@ public class ProductDTOConverter {
         );
     }
 
-    public Product toEntity(ProductRequestDTO createDTO) {
+    public Product toEntityUpdateCreate(ProductRequestDTO createDTO) {
         log.trace("Convert ProductCreateDTO: {}, to Product", createDTO);
         return new Product(
                 createDTO.getTitle(),
@@ -58,7 +58,7 @@ public class ProductDTOConverter {
         );
     }
 
-    public Product toEntity(Long id, ProductRequestDTO updateDTO) {
+    public Product toEntityUpdateCreate(Long id, ProductRequestDTO updateDTO) {
         log.trace("Convert ProductUpdateDTO: {}, to Product", updateDTO);
         Product product = productService.findProductById(id);
         product.setTitle(updateDTO.getTitle());
@@ -67,6 +67,13 @@ public class ProductDTOConverter {
                 updateDTO.getCategoryId() != null
                         ? categoryService.findProductCategory(updateDTO.getCategoryId()).get()
                         : null);
+        product.setProductImage(
+                updateDTO.getImagePath() != null
+                        ? imageService.findProductImageByPath(updateDTO.getImagePath()).isPresent()
+                            ? imageService.findProductImageByPath(updateDTO.getImagePath()).get()
+                            : new ProductImage(updateDTO.getImagePath())
+                        : imageService.findDefaultImage().get()
+        );
         return product;
     }
 

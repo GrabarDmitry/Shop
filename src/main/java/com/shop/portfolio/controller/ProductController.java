@@ -15,8 +15,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import javax.validation.Valid;
 
 @Api(tags = {"Product"})
 @RestController
@@ -59,11 +62,12 @@ public class ProductController {
     @ApiOperation(value = "Create new Product")
     @PostMapping
     public ResponseEntity<ProductDTO> createProduct(
-            @RequestBody ProductRequestDTO createDTO) {
+            @RequestBody @Valid ProductRequestDTO createDTO
+    ) {
         log.trace("Controller method called to create new Product: {}", createDTO);
         return new ResponseEntity<>(converter.
                 toDTO(productService.
-                        createProduct(converter.toEntity(createDTO))),
+                        createProduct(converter.toEntityUpdateCreate(createDTO))),
                 HttpStatus.CREATED);
     }
 
@@ -71,12 +75,12 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProductById(
             @PathVariable Long id,
-            @RequestBody ProductRequestDTO updateDTO
+            @RequestBody @Valid ProductRequestDTO updateDTO
     ) {
         log.trace("Controller method called to update Product with id: {}", id);
         return new ResponseEntity<>(converter.
                 toDTO(productService.
-                        updateProduct(converter.toEntity(id, updateDTO))),
+                        updateProduct(converter.toEntityUpdateCreate(id, updateDTO))),
                 HttpStatus.OK);
     }
 
