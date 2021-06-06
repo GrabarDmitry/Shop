@@ -8,4 +8,6 @@ public interface ProductImageService {
 
     Optional<ProductImage> findProductImageByPath(String path);
 
+    Optional<ProductImage> findDefaultImage();
+
 }

@@ -3,6 +3,7 @@ package com.shop.portfolio.controller.converter;
 import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
 import com.shop.portfolio.controller.dto.responce.ProductDTO;
 import com.shop.portfolio.model.Product;
+import com.shop.portfolio.model.ProductImage;
 import com.shop.portfolio.service.ProductCategoryService;
 import com.shop.portfolio.service.ProductImageService;
 import com.shop.portfolio.service.ProductService;
@@ -32,6 +33,9 @@ public class ProductDTOConverter {
                         : null,
                 product.getUser() != null
                         ? product.getUser().getId()
+                        : null,
+                product.getProductImage() != null
+                        ? product.getProductImage().getId()
                         : null
         );
     }
@@ -47,8 +51,10 @@ public class ProductDTOConverter {
                         : null,
                 securityService.getCurrentUser().get(),
                 createDTO.getImagePath() != null
-                        ? null
-                        : null
+                        ? imageService.findProductImageByPath(createDTO.getImagePath()).isPresent()
+                            ? imageService.findProductImageByPath(createDTO.getImagePath()).get()
+                            : new ProductImage(createDTO.getImagePath())
+                        : imageService.findDefaultImage().get()
         );
     }
 
