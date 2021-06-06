@@ -32,7 +32,7 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ValidateExceptionInfo> handleValidateConflicts(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ValidateExceptionInfo> validateExceptionHandle(MethodArgumentNotValidException ex) {
         log.error("{}: {}", ex.getClass(), ex.getMessage());
 
         Map<String, List<String>> errors = new HashMap<>();

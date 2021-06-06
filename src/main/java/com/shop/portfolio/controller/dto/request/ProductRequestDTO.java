@@ -1,5 +1,6 @@
 package com.shop.portfolio.controller.dto.request;
 
+import com.shop.portfolio.util.validation.ProductCategoryExistWithId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class ProductRequestDTO {
 
     @NotNull(message = "categoryId should not be empty")
     @Positive(message = "categoryId should be positive")
+    @ProductCategoryExistWithId(message = "product category with categoryId not found")
     private Long categoryId;
 
     @Size(max = 256, message = "imagePath must be less than 256 characters")
