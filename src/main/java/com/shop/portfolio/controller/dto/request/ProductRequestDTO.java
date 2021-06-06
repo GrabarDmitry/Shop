@@ -3,6 +3,7 @@ package com.shop.portfolio.controller.dto.request;
 import com.shop.portfolio.util.validation.ProductCategoryExistWithId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductRequestDTO {
 
     @NotEmpty(message = "title should not be empty")

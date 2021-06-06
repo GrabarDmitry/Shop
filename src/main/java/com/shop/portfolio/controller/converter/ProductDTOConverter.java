@@ -1,7 +1,7 @@
 package com.shop.portfolio.controller.converter;
 
 import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductDTO;
+import com.shop.portfolio.controller.dto.responce.ProductResponceDTO;
 import com.shop.portfolio.model.Product;
 import com.shop.portfolio.model.ProductImage;
 import com.shop.portfolio.service.ProductCategoryService;
@@ -22,9 +22,9 @@ public class ProductDTOConverter {
     private final ProductService productService;
     private final ProductImageService imageService;
 
-    public ProductDTO toDTO(Product product) {
+    public ProductResponceDTO toDTO(Product product) {
         log.trace("Convert Product: {}, to ProductDTO", product);
-        return new ProductDTO(
+        return new ProductResponceDTO(
                 product.getId(),
                 product.getTitle(),
                 product.getDescription(),
@@ -40,7 +40,7 @@ public class ProductDTOConverter {
         );
     }
 
-    public Product toEntityUpdateCreate(ProductRequestDTO createDTO) {
+    public Product toEntityCreate(ProductRequestDTO createDTO) {
         log.trace("Convert ProductCreateDTO: {}, to Product", createDTO);
         return new Product(
                 createDTO.getTitle(),
@@ -52,13 +52,13 @@ public class ProductDTOConverter {
                 securityService.getCurrentUser().get(),
                 createDTO.getImagePath() != null
                         ? imageService.findProductImageByPath(createDTO.getImagePath()).isPresent()
-                            ? imageService.findProductImageByPath(createDTO.getImagePath()).get()
-                            : new ProductImage(createDTO.getImagePath())
+                        ? imageService.findProductImageByPath(createDTO.getImagePath()).get()
+                        : new ProductImage(createDTO.getImagePath())
                         : imageService.findDefaultImage().get()
         );
     }
 
-    public Product toEntityUpdateCreate(Long id, ProductRequestDTO updateDTO) {
+    public Product toEntityUpdate(Long id, ProductRequestDTO updateDTO) {
         log.trace("Convert ProductUpdateDTO: {}, to Product", updateDTO);
         Product product = productService.findProductById(id);
         product.setTitle(updateDTO.getTitle());
@@ -70,8 +70,8 @@ public class ProductDTOConverter {
         product.setProductImage(
                 updateDTO.getImagePath() != null
                         ? imageService.findProductImageByPath(updateDTO.getImagePath()).isPresent()
-                            ? imageService.findProductImageByPath(updateDTO.getImagePath()).get()
-                            : new ProductImage(updateDTO.getImagePath())
+                        ? imageService.findProductImageByPath(updateDTO.getImagePath()).get()
+                        : new ProductImage(updateDTO.getImagePath())
                         : imageService.findDefaultImage().get()
         );
         return product;

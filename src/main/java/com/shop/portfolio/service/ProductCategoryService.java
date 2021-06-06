@@ -10,4 +10,6 @@ public interface ProductCategoryService {
 
     Optional<ProductCategory> findProductCategory(Long id);
 
+    ProductCategory createProductCategory(ProductCategory productCategory);
+
 }

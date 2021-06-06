@@ -1,6 +1,6 @@
 package com.shop.portfolio.controller;
 
-import com.shop.portfolio.controller.dto.request.AuthenticationDTO;
+import com.shop.portfolio.controller.dto.request.AuthenticationRequestDTO;
 import com.shop.portfolio.controller.dto.responce.AuthenticationResponseDTO;
 import com.shop.portfolio.service.SecurityService;
 import io.swagger.annotations.Api;
@@ -22,7 +22,7 @@ public class SecurityController {
 
     @ApiOperation(value = "User authentication")
     @PostMapping("/auth")
-    public ResponseEntity<AuthenticationResponseDTO> authentication(@RequestBody AuthenticationDTO dto) {
+    public ResponseEntity<AuthenticationResponseDTO> authentication(@RequestBody AuthenticationRequestDTO dto) {
         log.trace("Controller method called to authentication user: {}", dto);
         return ResponseEntity.ok(
                 new AuthenticationResponseDTO(securityService.

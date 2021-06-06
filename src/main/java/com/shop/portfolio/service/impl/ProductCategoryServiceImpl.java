@@ -37,5 +37,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return productCategoryRepository.findById(id);
     }
 
+    @Override
+    public ProductCategory createProductCategory(ProductCategory productCategory) {
+        log.info("Service method called to create Product Category: {}", productCategory);
+        return productCategoryRepository.save(productCategory);
+    }
+
 
 }

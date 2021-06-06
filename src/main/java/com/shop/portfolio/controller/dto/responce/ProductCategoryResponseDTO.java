@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class ProductCategoryDTO {
+public class ProductCategoryResponseDTO {
     private Long id;
     private String title;
 }
