@@ -43,5 +43,4 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return productCategoryRepository.save(productCategory);
     }
 
-
 }

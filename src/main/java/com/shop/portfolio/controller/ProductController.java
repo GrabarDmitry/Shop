@@ -2,7 +2,7 @@ package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductDTOConverter;
 import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductResponceDTO;
+import com.shop.portfolio.controller.dto.responce.ProductResponseDTO;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.util.PageableSwagger;
 import io.swagger.annotations.Api;
@@ -33,7 +33,7 @@ public class ProductController {
     @ApiOperation(value = "View list of Product")
     @GetMapping
     @PageableSwagger
-    public ResponseEntity<Page<ProductResponceDTO>> getAllProducts(
+    public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
             @ApiIgnore
             @PageableDefault(
                     page = 0,
@@ -50,7 +50,7 @@ public class ProductController {
 
     @ApiOperation(value = "Get Product by Id")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponceDTO> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable Long id) {
         log.trace("Controller method called to view Product with id: {}", id);
         return new ResponseEntity<>(
                 converter.
@@ -60,7 +60,7 @@ public class ProductController {
 
     @ApiOperation(value = "Create new Product")
     @PostMapping
-    public ResponseEntity<ProductResponceDTO> createProduct(
+    public ResponseEntity<ProductResponseDTO> createProduct(
             @RequestBody @Valid ProductRequestDTO createDTO
     ) {
         log.trace("Controller method called to create new Product: {}", createDTO);
@@ -72,7 +72,7 @@ public class ProductController {
 
     @ApiOperation(value = "Update Product by id")
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponceDTO> updateProductById(
+    public ResponseEntity<ProductResponseDTO> updateProductById(
             @PathVariable Long id,
             @RequestBody @Valid ProductRequestDTO updateDTO
     ) {

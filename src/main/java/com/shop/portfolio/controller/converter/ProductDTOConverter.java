@@ -1,7 +1,7 @@
 package com.shop.portfolio.controller.converter;
 
 import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductResponceDTO;
+import com.shop.portfolio.controller.dto.responce.ProductResponseDTO;
 import com.shop.portfolio.model.Product;
 import com.shop.portfolio.model.ProductImage;
 import com.shop.portfolio.service.ProductCategoryService;
@@ -22,9 +22,9 @@ public class ProductDTOConverter {
     private final ProductService productService;
     private final ProductImageService imageService;
 
-    public ProductResponceDTO toDTO(Product product) {
+    public ProductResponseDTO toDTO(Product product) {
         log.trace("Convert Product: {}, to ProductDTO", product);
-        return new ProductResponceDTO(
+        return new ProductResponseDTO(
                 product.getId(),
                 product.getTitle(),
                 product.getDescription(),
