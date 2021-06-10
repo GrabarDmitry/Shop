@@ -8,7 +8,7 @@ public interface SecurityService {
 
     String authentication(String email, String password);
 
-    String registration(User user);
+    User registration(User user);
 
     Optional<User> getCurrentUser();
 

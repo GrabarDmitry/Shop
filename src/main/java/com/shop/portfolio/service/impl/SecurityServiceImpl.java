@@ -1,6 +1,7 @@
 package com.shop.portfolio.service.impl;
 
 import com.shop.portfolio.model.User;
+import com.shop.portfolio.repository.UserRepository;
 import com.shop.portfolio.security.UserDetailsImpl;
 import com.shop.portfolio.security.jwt.TokenProvider;
 import com.shop.portfolio.service.SecurityService;
@@ -26,6 +27,7 @@ public class SecurityServiceImpl implements SecurityService {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsServiceImpl userDetailsService;
     private final TokenProvider provider;
+    private final UserRepository userRepository;
 
     public String authentication(String email, String password) {
         log.info("Service method called to authenticate User with email: {}, password: {}", email, password);
@@ -42,8 +44,9 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public String registration(User user) {
-        return null;
+    public User registration(User user) {
+        log.info("Service method called to registration User with email: {}", user.getEmail());
+        return userRepository.save(user);
     }
 
     @Override
