@@ -1,4 +1,4 @@
-package com.shop.portfolio.controller.dto.responce;
+package com.shop.portfolio.controller.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

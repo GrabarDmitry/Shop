@@ -1,6 +1,6 @@
 package com.shop.portfolio.util.validation;
 
-import com.shop.portfolio.service.ProductCategoryService;
+import com.shop.portfolio.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.Constraint;
@@ -16,28 +16,29 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({PARAMETER, FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = ProductCategoryExistWithId.Validator.class)
-public @interface ProductCategoryExistWithId {
+@Constraint(validatedBy = UserExistWithEmail.Validator.class)
+public @interface UserExistWithEmail {
 
-    String message() default "product category with id not found";
+    String message() default "user with installed email already exists";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
     @RequiredArgsConstructor
-    class Validator implements ConstraintValidator<ProductCategoryExistWithId, Long> {
+    class Validator implements ConstraintValidator<UserExistWithEmail, String> {
 
-        private final ProductCategoryService categoryService;
+        private final UserService userService;
 
         @Override
-        public void initialize(ProductCategoryExistWithId constraintAnnotation) {
+        public void initialize(UserExistWithEmail constraintAnnotation) {
 
         }
 
         @Override
-        public boolean isValid(Long id, ConstraintValidatorContext context) {
-            return id == null || categoryService.findProductCategory(id).isPresent();
+        public boolean isValid(String email, ConstraintValidatorContext context) {
+            return email == null || userService.findUserByEmail(email).isEmpty();
         }
     }
 }
+

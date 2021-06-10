@@ -2,7 +2,7 @@ package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductCategoryDTOConverter;
 import com.shop.portfolio.controller.dto.request.ProductCategoryRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductCategoryResponseDTO;
+import com.shop.portfolio.controller.dto.response.ProductCategoryResponseDTO;
 import com.shop.portfolio.service.ProductCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

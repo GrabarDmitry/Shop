@@ -1,7 +1,7 @@
 package com.shop.portfolio.controller.converter;
 
 import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductResponseDTO;
+import com.shop.portfolio.controller.dto.response.ProductResponseDTO;
 import com.shop.portfolio.model.Product;
 import com.shop.portfolio.model.ProductImage;
 import com.shop.portfolio.service.ProductCategoryService;

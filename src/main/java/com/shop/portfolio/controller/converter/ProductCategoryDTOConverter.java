@@ -1,7 +1,7 @@
 package com.shop.portfolio.controller.converter;
 
 import com.shop.portfolio.controller.dto.request.ProductCategoryRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductCategoryResponseDTO;
+import com.shop.portfolio.controller.dto.response.ProductCategoryResponseDTO;
 import com.shop.portfolio.model.ProductCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

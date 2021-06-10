@@ -2,7 +2,7 @@ package com.shop.portfolio.controller;
 
 import com.shop.portfolio.controller.converter.ProductDTOConverter;
 import com.shop.portfolio.controller.dto.request.ProductRequestDTO;
-import com.shop.portfolio.controller.dto.responce.ProductResponseDTO;
+import com.shop.portfolio.controller.dto.response.ProductResponseDTO;
 import com.shop.portfolio.service.ProductService;
 import com.shop.portfolio.util.PageableSwagger;
 import io.swagger.annotations.Api;
